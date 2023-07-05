@@ -5,6 +5,11 @@ https://chrismorgan.info/blog/rust-fizzbuzz/
 
 simple FizzBuzz implementation
 
+Benchmark: 
+
+1..1_000_000
+Elapsed time: 14.222478597s
+
 ```rust
 for i in 1..101 {
     if i % 15 == 0 {
@@ -16,6 +21,42 @@ for i in 1..101 {
     } else {
         println!("{}", i);
     }
+}
+```
+
+
+Benchmark:
+
+1..1_000_000
+Elapsed time: 4.861693918s
+
+After optimize:
+
+```rust
+use std::time::Instant;
+
+fn main() {
+    let start_time = Instant::now();
+
+    let mut fizz_buzz = String::with_capacity(9_000_000); // Preallocate a buffer for the FizzBuzz sequence
+
+    for i in 1..=1_000_000 {
+        if i % 15 == 0 {
+            fizz_buzz.push_str("FizzBuzz\n");
+        } else if i % 5 == 0 {
+            fizz_buzz.push_str("Buzz\n");
+        } else if i % 3 == 0 {
+            fizz_buzz.push_str("Fizz\n");
+        } else {
+            fizz_buzz.push_str(&format!("{}\n", i));
+        }
+    }
+
+    println!("{}", fizz_buzz);
+
+    let elapsed_time = start_time.elapsed();
+
+    println!("Elapsed time: {:?}", elapsed_time);
 }
 ```
 
@@ -106,6 +147,11 @@ for i in 1..101 {
 
 implementing `std::fmt::Display`
 
+Benchmark:
+
+1..1_000_000
+Elapsed time: 14.05603776s
+
 ```rust
 use std::fmt;
 
@@ -127,6 +173,7 @@ impl fmt::Display for Term {
     }
 }
 
+// Useless. We can remove it.
 impl fmt::Debug for Term {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         fmt::Display::fmt(self, f)

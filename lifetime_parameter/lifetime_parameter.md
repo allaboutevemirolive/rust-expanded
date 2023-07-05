@@ -33,3 +33,7 @@ https://users.rust-lang.org/t/lifetime-rules-for-functions-without-arguments/846
 
     CODEX:
     https://users.rust-lang.org/t/lifetime-rules-for-functions-without-arguments/84682/23?u=allaboutevemirolive
+
+
+> Lifetime shortening and turbofish ascription
+https://users.rust-lang.org/t/lifetime-shortening-and-turbofish-ascription/56350
