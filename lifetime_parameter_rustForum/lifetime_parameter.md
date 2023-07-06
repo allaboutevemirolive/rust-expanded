@@ -37,3 +37,19 @@ https://users.rust-lang.org/t/lifetime-rules-for-functions-without-arguments/846
 
 > Lifetime shortening and turbofish ascription
 https://users.rust-lang.org/t/lifetime-shortening-and-turbofish-ascription/56350
+
+___
+
+> [[Puzzle about the lifetime `&’a mut self `]] [Solved by code refactor]
+https://users.rust-lang.org/t/puzzle-about-the-lifetime-a-mut-self-solved-by-code-refactor/65421
+
+    Common Rust Lifetime Misconceptions
+    https://github.com/pretzelhammer/rust-blog/blob/master/posts/common-rust-lifetime-misconceptions.md#common-rust-lifetime-misconceptions
+
+[[CODEX_SOL_65421]]
+
+
+___
+
+
+> [[1_more_lifetime_65421]]
