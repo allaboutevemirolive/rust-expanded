@@ -12,3 +12,10 @@ ___
 
 > [[When is it useful to define multiple lifetimes in a struct]]?
 https://stackoverflow.com/questions/29861388/when-is-it-useful-to-define-multiple-lifetimes-in-a-struct
+
+    My answer
+    https://stackoverflow.com/a/76624925/16768401
+
+
+[[Lifetime gets smaller after extracting method]]
+https://stackoverflow.com/questions/75506956/lifetime-gets-smaller-after-extracting-method

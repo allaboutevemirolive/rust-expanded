@@ -35,6 +35,9 @@ https://users.rust-lang.org/t/lifetime-rules-for-functions-without-arguments/846
     https://users.rust-lang.org/t/lifetime-rules-for-functions-without-arguments/84682/23?u=allaboutevemirolive
 
 
+___
+
+
 > Lifetime shortening and turbofish ascription
 https://users.rust-lang.org/t/lifetime-shortening-and-turbofish-ascription/56350
 
@@ -52,4 +55,26 @@ https://users.rust-lang.org/t/puzzle-about-the-lifetime-a-mut-self-solved-by-cod
 ___
 
 
-> [[1_more_lifetime_65421]]
+> Can the lifetime parameter in dyn trait object not be covariance?
+https://users.rust-lang.org/t/can-the-lifetime-parameter-in-dyn-trait-object-not-be-covariance/82601
+
+    What is the point of lifetime parameters in “struct” & “impl” blocks?
+    https://users.rust-lang.org/t/what-is-the-point-of-lifetime-parameters-in-struct-impl-blocks/14631/4
+
+
+___
+
+
+RELATED THREAD
+
+
+Lifetime inference problems when creating a trait object / returning opaque type
+https://users.rust-lang.org/t/lifetime-inference-problems-when-creating-a-trait-object-returning-opaque-type/81582
+
+
+Can the lifetime parameter in dyn trait object not be covariance
+https://users.rust-lang.org/t/can-the-lifetime-parameter-in-dyn-trait-object-not-be-covariance/82601/1
+
+
+What value does the lifetime parameter infer if no reference is passed in
+https://users.rust-lang.org/t/what-value-does-the-lifetime-parameter-infer-if-no-reference-is-passed-in/83196

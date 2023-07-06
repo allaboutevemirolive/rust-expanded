@@ -159,7 +159,7 @@ fn main() {
 ```
 
 
-> Example multiple lifetime parameter because input is nested lifetime parameter
+> [[multiple lifetime parameter because input is nested lifetime parameter]]
 
 
 ```rust
@@ -198,8 +198,6 @@ In the `process` function signature, we specify a lifetime constraint `'a: 'b`, 
 In the `main` function, we create a string slice `data` and a `Container` instance referencing that data. Then, we create a `Processor` instance with a reference to the `Container`. Finally, we call the `process` function with a reference to the `Processor` and print the resulting value.
 
 By using the `'a: 'b` lifetime constraint, we guarantee that the returned reference in `process` is valid for the entire lifetime of the referenced data in the `Container`.
-
-I hope this example provides a clearer understanding of how to use lifetime constraints in more complex scenarios.
 
 
 
