@@ -58,7 +58,7 @@ where
             // string that comes after the delimiter, effectively advancing the iterator to the next 
             // part of the string.
             
-            // NOTE: delim_end is exclusive
+            // TODO: delim_end is exclusive?
             *remainder = &remainder[delim_end..];
             println!("{}", remainder);
             
