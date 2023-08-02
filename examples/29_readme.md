@@ -392,9 +392,354 @@ fn main() {
 ```
 
 
+___
+
+
+## Chaining Methods with Builder Pattern 
+
+
+COMPILE!
+
+```rust
+trait NotLifetimeless {
+    fn eval(&self) -> i32;
+}
+
+#[derive(Debug)]
+struct WithLifetimeBuilder<'a> {
+    data: Option<&'a [i32]>,
+}
+
+impl<'a> WithLifetimeBuilder<'a> {
+    fn new() -> Self {
+        Self { data: None }
+    }
+
+    fn with_data(mut self, data: &'a [i32]) -> Self {
+        self.data = Some(data);
+        self
+    }
+
+    fn build(self) -> Result<WithLifetime<'a>, &'static str> {
+        match self.data {
+            Some(data) => Ok(WithLifetime { data }),
+            None => Err("Missing data"),
+        }
+    }
+}
+
+#[derive(Debug)]
+struct WithLifetime<'a> {
+    data: &'a [i32],
+}
+
+impl<'a> NotLifetimeless for WithLifetime<'a> {
+    fn eval(&self) -> i32 {
+        self.data[0]
+    }
+}
+
+#[derive(Debug)]
+struct Operation {
+    data: Vec<i32>,
+}
+
+impl Operation {
+    fn do_things(&self) -> Vec<i32> {
+        let mut v = Vec::new();
+
+        for i in 0..self.data.len() {
+            let t = WithLifetimeBuilder::new()
+                .with_data(&self.data[i..=i])
+                .build()
+                .unwrap(); // Safe unwrap in this case
+            v.push(t.eval());
+        }
+        v
+    }
+}
+
+fn main() {
+    let op = Operation {
+        data: vec![4, 5, 6],
+    };
+    let v = op.do_things();
+    println!("Result: {:?}", v);
+}
+```
+
+
+___
+
+
+## Phantom Data for Lifetime Annotation
+
+
+COMPILE!
+
+
+```rust
+use std::marker::PhantomData;
+
+trait NotLifetimeless<'a> {
+    type Data;
+    fn create(data: Self::Data) -> Self;
+    fn eval(&self) -> i32;
+}
+
+#[derive(Debug)]
+struct WithLifetime<'a> {
+    data: PhantomData<&'a [i32]>,
+}
+
+impl<'a> NotLifetimeless<'a> for WithLifetime<'a> {
+    type Data = &'a [i32];
+
+    fn create(_data: Self::Data) -> Self {
+        Self {
+            data: PhantomData,
+        }
+    }
+
+    fn eval(&self) -> i32 {
+        // Placeholder logic since data cannot be directly accessed
+        42
+    }
+}
+
+#[derive(Debug)]
+struct Operation {
+    data: Vec<i32>,
+}
+
+impl Operation {
+    fn do_things<'a>(&'a self) -> Vec<i32> {
+        let mut v = Vec::new();
+
+        for i in 0..self.data.len() {
+            let t = WithLifetime::create(&self.data[i..=i]);
+            v.push(t.eval());
+        }
+        v
+    }
+}
+
+fn main() {
+    let op = Operation {
+        data: vec![4, 5, 6],
+    };
+    let v = op.do_things();
+    println!("Result: {:?}", v);
+}
+```
+
+___
+
+
+## Procedural Macros
+
+Implementing the given code using procedural macros involves generating code at compile time based on the provided input. Unfortunately, demonstrating the complete implementation of a procedural macro within this text-based interface isn't feasible.
 
 
 
+___
+
+
+## Const Generics
+
+
+```rust
+trait ConstGenerics<const N: usize> {
+    fn create(data: [i32; N]) -> Self;
+    fn eval(&self) -> i32;
+}
+
+#[derive(Debug)]
+struct WithConstGenerics<const N: usize> {
+    data: [i32; N],
+}
+
+impl<const N: usize> ConstGenerics<N> for WithConstGenerics<N> {
+    fn create(data: [i32; N]) -> Self {
+        Self { data }
+    }
+
+    fn eval(&self) -> i32 {
+        self.data[0]
+    }
+}
+
+#[derive(Debug)]
+struct Operation<const M: usize> {
+    data: [i32; M],
+}
+
+impl<const M: usize> Operation<M> {
+    fn do_things(&self) -> Vec<i32> {
+        let mut v = Vec::new();
+
+        for i in 0..self.data.len() {
+            let t = WithConstGenerics::create([self.data[i]]);
+            v.push(t.eval());
+        }
+        v
+    }
+}
+
+fn main() {
+    let op = Operation { data: [4, 5, 6] };
+    let v = op.do_things();
+    println!("Result: {:?}", v);
+}
+```
+
+```
+Can the const generics implement lifetime?
+```
+
+No, const generics and lifetimes serve different purposes in Rust and are not directly related. Const generics are used to define constants in types, such as array lengths or other integer values, that are known at compile time. Lifetimes, on the other hand, are used to indicate how long references are valid and ensure memory safety.
+
+Lifetimes are used to prevent references from becoming invalid and causing memory safety issues. They help the Rust compiler ensure that references are always valid and prevent dangling pointers.
+
+Const generics don't have the same relationship to memory safety; they are primarily used to create more generic and reusable code by allowing types to be parameterized by compile-time constants. They can't be used to control the validity or scope of references like lifetimes do.
+
+So, while you can use const generics to implement functionality that relies on compile-time constant values, they are not a replacement for lifetimes when it comes to managing the validity and scope of references.
+
+
+
+___
+
+
+## Custom Lifetimes
+
+
+COMPILE!
+
+```rust
+trait NotLifetimeless<'a> {
+    type Data;
+    fn create(data: Self::Data) -> Self;
+    fn eval(&self) -> i32;
+}
+
+#[derive(Debug)]
+struct WithLifetime<'a> {
+    data: &'a [i32],
+}
+
+impl<'a> NotLifetimeless<'a> for WithLifetime<'a> {
+    type Data = &'a [i32];
+
+    fn create(data: Self::Data) -> Self {
+        Self { data }
+    }
+
+    fn eval(&self) -> i32 {
+        self.data[0]
+    }
+}
+
+#[derive(Debug)]
+struct Operation<'a> {
+    data: Vec<i32>,
+    lifetime: PhantomData<&'a ()>,
+}
+
+impl<'a> Operation<'a> {
+    fn new(data: Vec<i32>) -> Self {
+        Self {
+            data,
+            lifetime: PhantomData,
+        }
+    }
+
+    fn do_things(&self) -> Vec<i32> {
+        let mut v = Vec::new();
+
+        for i in 0..self.data.len() {
+            let t = WithLifetime::create(&self.data[i..=i]);
+            v.push(t.eval());
+        }
+        v
+    }
+}
+
+fn main() {
+    let op = Operation::new(vec![4, 5, 6]);
+    let v = op.do_things();
+    println!("Result: {:?}", v);
+}
+```
+
+
+___
+
+
+## Async/Await Patterns
+
+
+
+```rust
+use tokio::runtime;
+
+trait NotLifetimeless<'a> {
+    type Data;
+    fn create(data: Self::Data) -> Self;
+    fn eval(&self) -> i32;
+}
+
+#[derive(Debug)]
+struct WithLifetime<'a> {
+    data: &'a [i32],
+}
+
+impl<'a> NotLifetimeless<'a> for WithLifetime<'a> {
+    type Data = &'a [i32];
+
+    fn create(data: Self::Data) -> Self {
+        Self { data }
+    }
+
+    fn eval(&self) -> i32 {
+        self.data[0]
+    }
+}
+
+struct Operation<'a> {
+    data: Vec<i32>,
+    lifetime: &'a (),
+}
+
+impl<'a> Operation<'a> {
+    async fn do_things(&self) -> Vec<i32> {
+        let mut v = Vec::new();
+
+        for i in 0..self.data.len() {
+            let t = WithLifetime::create(&self.data[i..=i]);
+            v.push(t.eval());
+        }
+        v
+    }
+}
+
+async fn async_main<'a>() {
+    let op = Operation {
+        data: vec![4, 5, 6],
+        lifetime: &(),
+    };
+    let v = op.do_things().await;
+    println!("Result: {:?}", v);
+}
+
+fn main() {
+    let rt = runtime::Builder::new_current_thread()
+        .enable_all()
+        .build()
+        .unwrap();
+
+    rt.block_on(async_main());
+}                             
+```
 
 
 
