@@ -143,11 +143,11 @@ fn main() {
 
 ___
 
+## UNSAFE!
+
+
 
 COMPILE!
-
-UNSAFE!
-
 
 ```rust
 struct Pixel<'img> {
