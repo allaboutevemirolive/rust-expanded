@@ -1,3 +1,9 @@
+
+
+
+COMPILE ERROR
+
+```rust
 fn transform_collection<F, T>(collection: Vec<T>, transform: F) -> Vec<T>
 where
     F: for<'a> Fn(&'a T) -> T,
@@ -20,3 +26,4 @@ fn main() {
     println!("Original Words: {:?}", words);
     println!("Transformed Words: {:?}", transformed_words);
 }
+```
