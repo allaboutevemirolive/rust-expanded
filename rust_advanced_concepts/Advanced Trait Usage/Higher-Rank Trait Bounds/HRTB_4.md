@@ -7,7 +7,8 @@ struct Closure<F> {
 }
 
 impl<F> Closure<F>
-    where for<'a> F: Fn(&'a (u8, u16)) -> &'a u8,
+where 
+    for<'a> F: Fn(&'a (u8, u16)) -> &'a u8,
 {
     fn call(&self) -> &u8 {
         (self.func)(&self.data)

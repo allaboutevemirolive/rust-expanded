@@ -18,7 +18,7 @@ ___
 trait Processor {
     fn compute(&self, x: i64, y: i64) -> i64;
 }
-// monomorphization
+                        // monomorphization
                         // accept generic type
 fn process<P: Processor>(processor: &P, x: i64) {
     let result = processor.compute(x, 42);
