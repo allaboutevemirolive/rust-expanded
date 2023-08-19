@@ -25,4 +25,5 @@ fn main() {
 
     println!("Display: {}", person);
     println!("Debug: {:?}", person);
+    
 }
