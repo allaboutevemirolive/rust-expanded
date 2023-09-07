@@ -1,0 +1,11 @@
+/home/nemesis/Documents/Github/my_repo/rust-expanded/Compiler/target/debug/deps/quote-7e6921f258960f32.rmeta: /home/nemesis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/quote-1.0.33/src/lib.rs /home/nemesis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/quote-1.0.33/src/ext.rs /home/nemesis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/quote-1.0.33/src/format.rs /home/nemesis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/quote-1.0.33/src/ident_fragment.rs /home/nemesis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/quote-1.0.33/src/to_tokens.rs /home/nemesis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/quote-1.0.33/src/runtime.rs /home/nemesis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/quote-1.0.33/src/spanned.rs
+
+/home/nemesis/Documents/Github/my_repo/rust-expanded/Compiler/target/debug/deps/quote-7e6921f258960f32.d: /home/nemesis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/quote-1.0.33/src/lib.rs /home/nemesis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/quote-1.0.33/src/ext.rs /home/nemesis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/quote-1.0.33/src/format.rs /home/nemesis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/quote-1.0.33/src/ident_fragment.rs /home/nemesis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/quote-1.0.33/src/to_tokens.rs /home/nemesis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/quote-1.0.33/src/runtime.rs /home/nemesis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/quote-1.0.33/src/spanned.rs
+
+/home/nemesis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/quote-1.0.33/src/lib.rs:
+/home/nemesis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/quote-1.0.33/src/ext.rs:
+/home/nemesis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/quote-1.0.33/src/format.rs:
+/home/nemesis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/quote-1.0.33/src/ident_fragment.rs:
+/home/nemesis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/quote-1.0.33/src/to_tokens.rs:
+/home/nemesis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/quote-1.0.33/src/runtime.rs:
+/home/nemesis/.cargo/registry/src/index.crates.io-6f17d22bba15001f/quote-1.0.33/src/spanned.rs:
